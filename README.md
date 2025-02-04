@@ -84,23 +84,19 @@ To run the app in Docker, follow these steps:
 2. **Write the following Dockerfile configuration**:
 
    ```Dockerfile
-   # Use the official Python image
-   FROM python:3.8-slim
+   FROM python:3.9-slim
 
-   # Set the working directory inside the container
    WORKDIR /app
-
-   # Copy the local directory contents into the container
-   COPY . /app
-
-   # Install any needed dependencies
-   RUN pip install -r requirements.txt
-
-   # Expose port 5000 to the outside world
+   
+   COPY requirements.txt requirements.txt
+   RUN pip install --no-cache-dir -r requirements.txt
+   
+   COPY . .
+   
+   CMD ["python", "app.py"]
+   
    EXPOSE 5000
 
-   # Define the command to run your app
-   CMD ["python", "app.py"]
    ```
 
 3. **Build the Docker image**:
